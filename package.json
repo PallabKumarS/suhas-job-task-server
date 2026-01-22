@@ -1,12 +1,39 @@
 {
   "name": "job-task-suhas-server",
-  "module": "index.ts",
   "type": "module",
   "private": true,
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "bun run tsc",
+    "prod": "node ./dist/server.js",
+    "lint": "biome check src --ext .ts",
+    "lint:fix": "biome lint src",
+    "create:module": "bun run src/scripts/createModule.ts"
+  },
   "devDependencies": {
-    "@types/bun": "latest"
+    "@biomejs/biome": "2.3.11",
+    "@types/bcrypt": "^6.0.0",
+    "@types/body-parser": "^1.19.6",
+    "@types/bun": "latest",
+    "@types/cookie-parser": "^1.4.10",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
+    "tsx": "^4.21.0"
   },
   "peerDependencies": {
     "typescript": "^5"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "body-parser": "^2.2.2",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "http-status": "^2.1.0",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.1.5",
+    "zod": "^4.3.5"
   }
 }
