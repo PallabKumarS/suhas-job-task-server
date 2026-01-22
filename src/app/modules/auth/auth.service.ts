@@ -209,8 +209,53 @@ const createInvitationIntoDB = async (
   return newInvitation;
 };
 
+const refreshToken = async (token: string) => {
+  // checking if the given token is valid
+  const decoded = verifyToken(token, config.jwt_refresh_secret as string);
+
+  const { email, iat } = decoded;
+
+  if (new Date(Number(iat) * 1000) < new Date()) {
+    throw new AppError(httpStatus.FORBIDDEN, "Token expired");
+  }
+
+  // checking if the user is exist
+  const user = await UserModel.isUserExists(email);
+
+  if (!user) {
+    throw new AppError(httpStatus.NOT_FOUND, "This user is not found !");
+  }
+
+  // checking if the user is active
+  if (user.status !== "ACTIVE") {
+    throw new AppError(httpStatus.FORBIDDEN, "Your account is deactivated !");
+  }
+
+  // checking if the user is already deleted
+  if (user?.isDeleted) {
+    throw new AppError(httpStatus.FORBIDDEN, "This user is deleted !");
+  }
+
+  const jwtPayload = {
+    userId: user._id,
+    role: user.role,
+    email: user.email,
+  };
+
+  const accessToken = createToken(
+    jwtPayload,
+    config.jwt_access_secret as string,
+    config.jwt_access_expires_in as string,
+  );
+
+  return {
+    accessToken,
+  };
+};
+
 export const AuthService = {
   loginUser,
   registerUser,
   createInvitationIntoDB,
+  refreshToken,
 };

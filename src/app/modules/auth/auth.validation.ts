@@ -16,20 +16,6 @@ const changePasswordValidationSchema = z.object({
   }),
 });
 
-const forgotPasswordValidationSchema = z.object({
-  body: z.object({
-    email: z.string({ message: "Email is required" }),
-  }),
-});
-
-const resetPasswordValidationSchema = z.object({
-  body: z.object({
-    password: z.string({ message: "Password is required" }),
-    email: z.string({ message: "Email is required" }),
-    code: z.number({ message: "Code is required" }),
-  }),
-});
-
 const inviteUserValidationSchema = z.object({
   body: z.object({
     email: z.string({ message: "Email is required" }),
@@ -40,7 +26,5 @@ const inviteUserValidationSchema = z.object({
 export const AuthValidation = {
   loginValidationSchema,
   changePasswordValidationSchema,
-  forgotPasswordValidationSchema,
-  resetPasswordValidationSchema,
   inviteUserValidationSchema,
 };
