@@ -22,7 +22,7 @@ const userSchema = new Schema<TUser, IUser>(
       default: UserStatus.ACTIVE,
     },
     isDeleted: { type: Boolean, default: false },
-    invitedAt: { type: Date },
+    invitedAt: { type: Date, required: true },
   },
   { timestamps: true },
 );

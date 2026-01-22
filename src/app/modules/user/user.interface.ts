@@ -9,9 +9,9 @@ export interface TUser extends Document {
   role: TUserRole;
   status: TUserStatus;
   isDeleted: boolean;
-  invitedAt?: Date;
-  createdAt?: Date;
-  updatedAt?: Date;
+  invitedAt: Date;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export interface IUser extends Model<TUser> {
