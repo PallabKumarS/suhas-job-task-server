@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { TErrorSources, TGenericErrorResponse } from './error.interface';
+/** biome-ignore-all lint/suspicious/noExplicitAny: <> */
+import type { TErrorSources, TGenericErrorResponse } from "./error.interface";
 
 const handleDuplicateError = (err: any): TGenericErrorResponse => {
   // Extract value within double quotes using regex
@@ -10,7 +10,7 @@ const handleDuplicateError = (err: any): TGenericErrorResponse => {
 
   const errorSources: TErrorSources = [
     {
-      path: '',
+      path: "",
       message: `${extractedMessage} already exists`,
     },
   ];

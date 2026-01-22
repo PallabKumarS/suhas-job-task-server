@@ -1,10 +1,11 @@
-import { ZodError, ZodIssue } from 'zod';
-import { TErrorSources, TGenericErrorResponse } from './error.interface';
+import type { ZodError, ZodIssue } from "zod";
+import type { TErrorSources, TGenericErrorResponse } from "./error.interface";
 
 const handleZodError = (err: ZodError): TGenericErrorResponse => {
   const errorSources: TErrorSources = err.issues.map((issue: ZodIssue) => {
     return {
-      path: issue?.path[issue.path.length - 1] || 'unknown',
+      path:
+        (issue?.path[issue.path.length - 1] as string | number) || "unknown",
       message: issue.message,
     };
   });
@@ -13,7 +14,7 @@ const handleZodError = (err: ZodError): TGenericErrorResponse => {
 
   return {
     statusCode,
-    message: errorSources.map((error) => error.message).join(', '),
+    message: errorSources.map((error) => error.message).join(", "),
     errorSources,
   };
 };

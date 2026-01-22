@@ -1,17 +1,20 @@
-import { NextFunction, Request, Response } from "express";
-import { AnyZodObject } from "zod";
+import type { NextFunction, Request, Response } from "express";
+import type { ZodObject } from "zod";
 import catchAsync from "../utils/catchAsync";
 
-const validateRequest = (schema: AnyZodObject) => {
-  return catchAsync(async (req: Request, res: Response, next: NextFunction) => {
-    // console.log(req.body);
+// biome-ignore lint/suspicious/noExplicitAny: <>
+const validateRequest = (schema: ZodObject<any>) => {
+  return catchAsync(
+    async (req: Request, _res: Response, next: NextFunction) => {
+      // console.log(req.body);
 
-    await schema.parseAsync({
-      body: req.body,
-    });
+      await schema.parseAsync({
+        body: req.body,
+      });
 
-    next();
-  });
+      next();
+    },
+  );
 };
 
 export default validateRequest;

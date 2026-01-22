@@ -1,6 +1,6 @@
-import { Response } from 'express';
+import type { Response } from "express";
 
-type TMeta = {
+export type TMeta = {
   page: number;
   limit: number;
   totalDoc: number;

@@ -1,5 +1,5 @@
-import mongoose from 'mongoose';
-import { TErrorSources, TGenericErrorResponse } from './error.interface';
+import type mongoose from "mongoose";
+import type { TErrorSources, TGenericErrorResponse } from "./error.interface";
 
 const handleValidationError = (
   err: mongoose.Error.ValidationError,
@@ -17,7 +17,7 @@ const handleValidationError = (
 
   return {
     statusCode,
-    message: errorSources.map((error) => error.message).join(', '),
+    message: errorSources.map((error) => error.message).join(", "),
     errorSources,
   };
 };

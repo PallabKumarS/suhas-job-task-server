@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { ErrorRequestHandler } from "express";
+import type { ErrorRequestHandler } from "express";
 import config from "../config";
 import handleCastError from "../errors/handleCastError";
-import { TErrorSources } from "../errors/error.interface";
+import type { TErrorSources } from "../errors/error.interface";
 import handleDuplicateError from "../errors/handleDuplicateError";
 import { AppError } from "../errors/AppError";
 import handleValidationError from "../errors/handleValidationError";
 import jwt from "jsonwebtoken";
 
-const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
+const globalErrorHandler: ErrorRequestHandler = (err, _req, res, _next) => {
   //setting default values
   let statusCode = 500;
   let message = "Something went wrong!";
