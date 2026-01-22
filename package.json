@@ -1,6 +1,5 @@
 {
   "name": "job-task-suhas-server",
-  "type": "module",
   "private": true,
   "scripts": {
     "dev": "tsx watch src/server.ts",
